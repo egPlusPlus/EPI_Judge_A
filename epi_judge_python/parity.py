@@ -2,11 +2,14 @@ from test_framework import generic_test
 
 
 def parity(x: int) -> int:
-    even_indicator = 0
-    while x:
-        even_indicator ^= (x & 1)
-        x >>= 1
-    return even_indicator
+    x ^= x >> 32
+    x ^= x >> 16
+    x ^= x >> 8
+    x ^= x >> 4
+    x ^= x >> 2
+    x ^= x >> 1
+
+    return (x & 0x1)
 
 
 if __name__ == '__main__':
